@@ -1,6 +1,7 @@
 import sys
+from importlib import reload 
 reload(sys)
-sys.setdefaultencoding('utf8')
+# sys.setdefaultencoding('utf8')
 from flask import Flask,render_template,request,redirect
 import json
 import id3
@@ -38,7 +39,7 @@ def recommend():
 			dislike2=request.json['dislike2']
 			dislike3=request.json['dislike3']
 			d=id3.execute([like1,like2,like3,dislike1,dislike2,dislike3])
-			print d
+			print(d)
 			if len(d)==0:
 				d={'hello':"Well, this sucks. ZERO recommended movies :("}
 			return json.dumps(d,200,{'ContentType':'application/json'})
@@ -57,7 +58,7 @@ def recommend1():
 			dislike2=request.json['dislike2']
 			dislike3=request.json['dislike3']
 			d=id3.execute([like1,like2,like3,dislike1,dislike2,dislike3])
-			print d
+			print (d)
 			if len(d)==0:
 				d={'hello':"Well, this sucks. ZERO recommended movies :("}
 			return json.dumps(d,200,{'ContentType':'application/json'})
@@ -66,5 +67,5 @@ def recommend1():
 	return render_template("AdvancedRecommendation.html")
 
 
-if __name__=='__main__':
-	app.run(host='0.0.0.0',port=5000,debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
